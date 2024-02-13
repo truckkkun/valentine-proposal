@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day Proposal</title>
+<style>
+    body {
+        background: linear-gradient(to right, #FFC0CB, #FF69B4, #FF1493, #FF00FF);
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        overflow: hidden; /* Prevent scrollbar */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+    #valentine-container {
+        text-align: center;
+        margin-top: 20vh;
+        position: relative;
+    }
+    h1 {
+        color: black;
+        font-size: 5vw; /* Responsive font size */
+        text-shadow: 2px 2px #FF00FF;
+        animation: sparkle 1s infinite alternate;
+    }
+    @keyframes sparkle {
+        0% { opacity: 1; }
+        100% { opacity: 0.7; }
+    }
+    button {
+        background-color: #FFC0CB;
+        color: black;
+        border: none;
+        padding: 3vw 6vw; /* Responsive padding */
+        margin: 5vw; /* Responsive margin */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 4vw; /* Responsive font size */
+        transition: all 0.3s ease;
+    }
+    button:hover {
+        background-color: #ff69f8;
+        color: white;
+    }
+    .confetti {
+        position: absolute;
+        width: 2vw; /* Responsive size */
+        height: 2vw; /* Responsive size */
+        background-color: #a3cfe1;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    @keyframes confetti-fall {
+        0% { transform: translateY(-100vh) rotate(0deg); }
+        100% { transform: translateY(100vh) rotate(720deg); }
+    }
+</style>
+</head>
+<body>
+
+<div id="valentine-container">
+    <h1 data-text="Will you be my Valentine?">Will you be my Valentine?</h1>
+    <button onclick="respond()">Yes</button>
+    <button id="noButton">No</button>
+</div>
+
+<audio id="popSound">
+  <source src="sound.mp3" type="audio/wav">
+</audio>
+
+<script>
+document.getElementById('noButton').addEventListener('mouseover', moveNoButton);
+
+function respond() {
+    createConfetti();
+    playSound();
+}
+
+function moveNoButton() {
+    var button = document.getElementById('noButton');
+    var newPositionX = Math.random() * (window.innerWidth - button.offsetWidth);
+    var newPositionY = Math.random() * (window.innerHeight - button.offsetHeight);
+    button.style.position = 'absolute';
+    button.style.top = newPositionY + 'px';
+    button.style.left = newPositionX + 'px';
+}
+
+function createConfetti() {
+    for (let i = 0; i < 300; i++) {
+        var colors = ['#800080', '#ADD8E6', '#a3cfe1', '#f69f8'];
+        let confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animation = 'confetti-fall ' + Math.random() * 5 + 3 + 's linear infinite';
+        document.body.appendChild(confetti);
+    }
+}
+
+function playSound() {
+    var audio = document.getElementById("popSound");
+    audio.play();
+}
+</script>
+
+</body>
+</html>
+
+
+
